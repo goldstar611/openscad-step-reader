@@ -1,9 +1,11 @@
 # openscad-step-reader
 
-A proof-of-concept project, testing OpenSCAD / STEP files loading.
+A proof-of-concept project, testing OpenSCAD / STEP files loading. This repo is a "fork" of
+https://github.com/agordon/openscad-step-reader but the author said he doesn't work on it anymore.
+So, I did a clone and push from commit 801da20a643d64372bf148be86fe0036fc9e0776 so this repo
+wouldn't get deleted if the original was deleted
 
 ## Usage
-
 
     $ openscad-step-reader
     
