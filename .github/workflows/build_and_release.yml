@@ -1,0 +1,38 @@
+name: build_and_release
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libocct-data-exchange-dev libocct-draw-dev
+
+      - name: Build
+        run: |
+          cmake -B build
+          cmake --build build -j
+
+      - name: Release
+        env:
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          artifacts=build/openscad-step-reader
+          tag=$(date +%Y%m%d)
+
+          gh release create --latest ${tag} -t ${tag} ${artifacts}
+
+          #if(!($?)) {
+          #  # gh release create failed, try gh release upload instead
+          #  gh release upload --clobber ${tag} ${artifacts}
+          #}
+
